@@ -1,0 +1,452 @@
+/* ===== CSS VARIABLES (Modern Theme) ===== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+:root {
+  /* Palet Warna Navy & Putih */
+  --color-primary-navy: #001f3f;       /* Navy gelap untuk header/brand */
+  --color-primary-navy-light: #003366; /* Navy lebih terang untuk hover */
+  --color-background: #F1EFEC;      /* Putih gading (off-white) untuk background */
+  --color-surface: #ffffff;         /* Putih bersih untuk card/form */
+  --color-text-primary: #212529;     /* Hitam/abu gelap untuk teks */
+  --color-text-secondary: #6c757d;    /* Abu-abu untuk teks sekunder */
+  --color-border: #dee2e6;          /* Abu-abu muda untuk border */
+  
+  /* Warna Aksen & Status */
+  --color-accent: #007bff;           /* Biru profesional sbg aksen */
+  --color-accent-dark: #0056b3;
+  --color-success: #198754;
+  --color-danger: #dc3545;
+  --color-warning: #ffc107;
+
+  /* UI Vars */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.05);
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --transition: all 0.2s ease-in-out;
+}
+
+/* Import page-specific styles */
+@import './pages/auth.css';
+@import './pages/home.css';
+@import './pages/add-story.css';
+@import './components.css';
+
+/* ===== RESET & BASE ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  background-color: var(--color-background);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Accessibility - Skip Link */
+.skip-link {
+  position: absolute;
+  top: -100px; /* Sembunyikan di luar layar */
+  left: 0;
+  background: var(--color-accent);
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  z-index: 9999;
+  border-radius: 0 0 var(--radius-md) 0;
+  font-weight: 500;
+  transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+  top: 0; /* Tampilkan saat di-fokus (via Tab) */
+}
+
+/* Screen reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ===== CONTAINER ===== */
+.container {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ===== APP BAR (NAVY THEME) ===== */
+.app-bar {
+  background-color: var(--color-primary-navy);
+  box-shadow: var(--shadow-md);
+  position: sticky;
+  top: 0;
+  z-index: 1001;
+  padding: 1rem 0;
+}
+
+.app-bar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* Untuk mode mobile */
+}
+
+.app-bar__brand a {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #ffffff; /* Putih */
+  text-decoration: none;
+}
+
+/* Tombol Hamburger */
+.app-bar__toggle {
+  display: none; /* Sembunyi di desktop */
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 1.75rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  line-height: 1;
+}
+
+.app-bar__navigation ul {
+  display: flex;
+  list-style: none;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.app-bar__navigation a {
+  color: #ffffff; /* Putih */
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: var(--transition);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+}
+
+.app-bar__navigation a:hover,
+.app-bar__navigation a:focus {
+  background-color: var(--color-primary-navy-light);
+  color: #ffffff;
+}
+
+/* ===== MAIN CONTENT ===== */
+main {
+  flex: 1;
+  padding: 2.5rem 0;
+  animation: fadeIn 0.3s ease-in;
+}
+
+main:focus {
+  outline: none; /* Dihilangkan, diganti skip-link */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== FOOTER (WHITE THEME) ===== */
+.app-footer {
+  background-color: var(--color-primary-navy);
+  border-top: 1px solid var(--color-border);
+  padding: 2rem 0;
+  text-align: center;
+  color: #ffffff;
+  font-size: 0.9rem;
+}
+
+/* ===== BUTTONS (MODERN) ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.625rem 1.25rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+  gap: 0.5rem;
+  line-height: 1.5;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.btn-primary {
+  background-color: var(--color-primary-navy);
+  color: white;
+  border-color: var(--color-primary-navy);
+}
+.btn-primary:hover:not(:disabled) {
+  background-color: #ffffff;
+  color: var(--color-primary-navy);
+  border-color: var(--color-primary-navy);
+}
+
+.btn-secondary {
+  background-color: var(--color-primary-navy);
+  color: white;
+  border-color: var(--color-text-secondary);
+}
+.btn-secondary:hover:not(:disabled) {
+  background-color: #ffffff;
+  border-color: var(--color-primary-navy-light);
+  color: var(--color-primary-navy-light);
+}
+
+.btn-danger {
+  background-color: var(--color-danger);
+  color: white;
+  border-color: var(--color-danger);
+}
+.btn-danger:hover:not(:disabled) {
+  background-color: #c82333;
+  border-color: #c82333;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ===== FORM ELEMENTS (MODERN) ===== */
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  font-size: 0.9rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: var(--transition);
+  background-color: #ffffff;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+}
+
+.form-control.error {
+  border-color: var(--color-danger);
+}
+.form-control.error:focus {
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.15);
+}
+
+.error-message {
+  color: var(--color-danger);
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+.success-message {
+  color: var(--color-success);
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+/* ===== LOADING SPINNER (MODERN) ===== */
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem;
+  grid-column: 1 / -1; /* Span full grid width if inside grid */
+}
+
+.spinner {
+  border: 4px solid var(--color-border);
+  border-top: 4px solid var(--color-primary-navy);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+.loading-spinner p {
+  margin-top: 1rem;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ===== CARDS (MODERN) ===== */
+.card {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+
+.card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.card-body {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== STORIES GRID (RESPONSIVE) ===== */
+.stories-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1.5rem;
+}
+
+/* ===== UTILITIES ===== */
+.text-center { text-align: center; }
+.text-secondary { color: var(--color-text-secondary); }
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+
+/* ===== RESPONSIVE DESIGN (CO-LOCATED) ===== */
+
+/* Tablet: 768px */
+@media screen and (min-width: 768px) {
+  .stories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .map-container {
+    height: 450px !important;
+  }
+}
+
+/* Desktop: 1024px and above */
+@media screen and (min-width: 1024px) {
+  .stories-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .map-container {
+    height: 500px !important;
+  }
+}
+
+/* Mobile: Bawa 768px (Mobile-first, tapi ini untuk override) */
+@media screen and (max-width: 767px) {
+  .app-bar .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  
+  /* Tampilkan tombol hamburger */
+  .app-bar__toggle {
+    display: block;
+  }
+  
+  /* Sembunyikan navigasi, atur untuk jadi menu dropdown */
+  .app-bar__navigation {
+    display: none;
+    width: 100%;
+    background-color: var(--color-primary-navy);
+    max-height: calc(100vh - 70px); /* Kurangi tinggi header */
+    overflow-y: auto;
+  }
+  
+  /* Style untuk navigasi saat terbuka */
+  .app-bar__navigation.open {
+    display: block;
+  }
+  
+  .app-bar__navigation ul {
+    flex-direction: column;
+    width: 100%;
+    gap: 0;
+    padding: 0.5rem 0;
+  }
+  
+  .app-bar__navigation a {
+    display: block;
+    padding: 1rem 1.5rem;
+    border-radius: 0;
+    border-bottom: 1px solid var(--color-primary-navy-light);
+  }
+
+  .app-bar__navigation li:last-child a {
+    border-bottom: none;
+  }
+
+  main {
+    padding: 1.5rem 0;
+  }
+}
+
+/* View Transition API */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.3s;
+}

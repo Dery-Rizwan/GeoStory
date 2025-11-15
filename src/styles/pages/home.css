@@ -1,0 +1,89 @@
+/* Home Page Styles */
+
+.hero-section {
+  text-align: center;
+  padding: 2rem 0;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  margin-bottom: 2.5rem;
+}
+
+.hero-section h2 {
+  font-size: 2rem;
+  color: var(--color-text-primary);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.hero-section p {
+  font-size: 1.1rem;
+  color: var(--color-text-secondary);
+}
+
+.map-section,
+.stories-section {
+  margin-bottom: 2.5rem;
+}
+
+.map-section h3,
+.stories-section h3 {
+  font-size: 1.75rem;
+  color: var(--color-text-primary);
+  font-weight: 700;
+  border-bottom: 2px solid var(--color-border);
+  padding-bottom: 0.5rem;
+}
+
+.map-container {
+  width: 100%;
+  min-height: 300px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.stories-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* Style .stories-grid dan .story-card 
+  sekarang ada di styles.css global 
+*/
+
+.btn-sm {
+  padding: 0.5rem 0.875rem;
+  font-size: 0.875rem;
+}
+
+.locate-btn {
+  margin-top: auto; /* Mendorong tombol ke bawah card */
+  align-self: flex-start; /* Pastikan tidak stretch */
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 767px) {
+  .hero-section {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .hero-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .map-section,
+  .stories-section {
+    margin-bottom: 1.5rem;
+  }
+  
+  .map-section h3,
+  .stories-section h3 {
+    font-size: 1.25rem;
+  }
+}

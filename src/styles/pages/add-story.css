@@ -1,0 +1,68 @@
+/* Add Story Page Styles */
+
+.add-story-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.add-story-container h2 {
+  font-size: 1.875rem;
+  color: var(--color-text-primary);
+  font-weight: 700;
+}
+
+.add-story-form {
+  background-color: var(--color-surface);
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-md);
+}
+
+.add-story-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.image-preview {
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  text-align: center;
+  background-color: var(--color-background);
+}
+
+.image-preview img {
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+}
+
+.form-actions {
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+  margin-top: 1.5rem;
+}
+
+#coordinates-display {
+  padding: 0.75rem;
+  background-color: var(--color-background);
+  border-radius: var(--radius-md);
+  text-align: center;
+  border: 1px solid var(--color-border);
+}
+
+/* Responsive */
+@media screen and (max-width: 767px) {
+  .add-story-form {
+    padding: 1.5rem;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse; /* Tombol primary jadi di atas */
+  }
+
+  .form-actions .btn {
+    width: 100%;
+  }
+}
