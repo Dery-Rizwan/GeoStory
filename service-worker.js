@@ -30,6 +30,7 @@ if (workbox) {
       }).then(() => self.clients.claim())
     );
   });
+  
   registerRoute(
     ({url}) => url.origin === 'https://story-api.dicoding.dev',
     new NetworkFirst({
@@ -69,10 +70,11 @@ if (workbox) {
   console.log(`[SW] Workbox gagal dimuat`);
 }
 
-// Push notification event
+// ===== PUSH NOTIFICATION EVENT =====
 self.addEventListener('push', (event) => {
   console.log('[SW] Push notification received:', event);
   
+  // Default notification data
   let notificationData = {
     title: 'New Story Available! 📖',
     body: 'Someone just shared a new story. Check it out!',
@@ -86,25 +88,51 @@ self.addEventListener('push', (event) => {
 
   if (event.data) {
     try {
-      const payload = event.data.json();
-      console.log('[SW] Push payload:', payload);
+      const textData = event.data.text();
+      console.log('[SW] Push data (text):', textData);
       
-      notificationData = {
-        title: payload.title || notificationData.title,
-        body: payload.body || payload.message || notificationData.body,
-        icon: payload.icon || notificationData.icon,
-        badge: notificationData.badge,
-        tag: payload.tag || 'story-notification',
-        data: {
-          url: payload.url || '/#/',
-          storyId: payload.storyId
+      try {
+        const payload = JSON.parse(textData);
+        console.log('[SW] Push payload (JSON):', payload);
+        
+        // Handle format API dengan nested options
+        if (payload.options) {
+          notificationData = {
+            title: payload.title || notificationData.title,
+            body: payload.options.body || notificationData.body,
+            icon: payload.options.icon || notificationData.icon,
+            badge: payload.options.badge || notificationData.badge,
+            tag: payload.options.tag || 'story-notification',
+            data: {
+              url: payload.options.data?.url || '/#/',
+              storyId: payload.options.data?.storyId
+            }
+          };
+        } 
+        // Handle format flat JSON (backward compatibility)
+        else {
+          notificationData = {
+            title: payload.title || notificationData.title,
+            body: payload.body || payload.message || notificationData.body,
+            icon: payload.icon || notificationData.icon,
+            badge: notificationData.badge,
+            tag: payload.tag || 'story-notification',
+            data: {
+              url: payload.url || '/#/',
+              storyId: payload.storyId
+            }
+          };
         }
-      };
+      } catch (jsonError) {
+        console.log('[SW] Push data is plain text, using as body');
+        notificationData.body = textData || notificationData.body;
+      }
     } catch (error) {
-      console.error('[SW] Error parsing push data:', error);
+      console.error('[SW] Error processing push data:', error);
     }
   }
 
+  // Show notification
   event.waitUntil(
     self.registration.showNotification(notificationData.title, {
       body: notificationData.body,
